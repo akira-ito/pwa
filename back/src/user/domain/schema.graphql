@@ -1,0 +1,23 @@
+type User {
+  _id: ID!
+  index: String
+  picture: String
+  age: Int
+  eyeColor: String
+  name: String!
+  company: String
+  email: String
+  phone: String
+  friends: [User]
+  greeting: String
+}
+
+enum EyeColor {
+  GREEN
+  BLUE
+}
+
+
+type Query {
+  list(name: String): [User]
+}
