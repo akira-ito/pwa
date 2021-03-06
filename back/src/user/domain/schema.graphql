@@ -4,7 +4,7 @@ type User {
   picture: String
   age: Int
   eyeColor: String
-  name: String!
+  name: String
   company: String
   email: String
   phone: String
@@ -19,5 +19,18 @@ enum EyeColor {
 
 
 type Query {
-  list(name: String): [User]
+  list(name: String, cursor: String, limit: Int): UserConnection!
+  get(id: ID!): User!
+}
+
+
+type UserConnection {
+  edges: [User!]!
+  pageInfo: PageInfo!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  endCursor: String!
+  total: Int!
 }

@@ -1,3 +1,5 @@
 export interface ListUserQueryRequestDTO {
-    name?: string;
+  name?: string;
+  cursor?: string;
+  limit?: number;
 }

@@ -1,4 +1,4 @@
-export interface ListUserQueryResponseDTO {
+export interface ListUserGetResponseDTO {
   _id: string;
   index: number;
   picture: string;
@@ -8,6 +8,6 @@ export interface ListUserQueryResponseDTO {
   company: string;
   email: string;
   phone: string;
-  friends: ListUserQueryResponseDTO[];
+  friends: ListUserGetResponseDTO[];
   greeting: string;
 }
