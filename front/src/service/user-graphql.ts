@@ -1,15 +1,22 @@
 import { gql } from '@apollo/client';
 
 export const LIST_USERS = gql`
-  query Users($name: String) {
-    list(name: $name) {
-      _id
-      picture
-      name
-      age
-      eyeColor
-      company
-      email
+  query Users($name: String, $cursor: String, $limit: Int) {
+    list(name: $name, cursor: $cursor, limit: $limit) {
+      edges {
+        _id
+        picture
+        name
+        age
+        eyeColor
+        company
+        email
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        total
+      }
     }
   }
 `;

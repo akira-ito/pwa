@@ -14,9 +14,7 @@ import styled from 'styled-components';
 import logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 
-const HeaderContainer = styled(Container)`
-  padding: 16px;
-`;
+const HeaderContainer = styled(Container)``;
 
 const HeaderLogoSection = styled.div.attrs(() => ({}))`
   grid-template: auto / auto auto;
@@ -24,25 +22,45 @@ const HeaderLogoSection = styled.div.attrs(() => ({}))`
   align-items: center;
 `;
 
+const HeaderInput = styled.input`
+  border-radius: 7px;
+  padding: 8px;
+`;
+
 const Header: React.FC = () => {
   const history = useHistory();
   const query = useQuery();
   const [search, setSearch] = useState('');
 
-  const handlerOnChange = useCallback(
+  const handlerSubmitting = useCallback(
     debounce((event: ChangeEvent<HTMLInputElement>) => {
-      const search = event.target.value;
+      // const search = event.target.value;
       history.push({
-        pathname: history.location.pathname,
+        pathname: '/', //history.location.pathname,
         search: queryString.stringify({ ...query, search }),
       });
     }, 300),
-    [query, history]
+    [query, history, search]
   );
 
   useEffect(() => {
     setSearch(query.search ?? '');
   }, [query.search, setSearch]);
+
+  const handerOnSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      handlerSubmitting(event);
+    },
+    [handlerSubmitting]
+  );
+
+  const handleChange = useCallback(
+    (event) => {
+      setSearch(event.target.value);
+    },
+    [setSearch]
+  );
 
   return (
     <HeaderContainer>
@@ -50,22 +68,25 @@ const Header: React.FC = () => {
         <Link to='/'>
           <HeaderLogoSection>
             <img src={logo} alt='Logo' width='34px' />
-            <strong>MySocial</strong>
+            <h1>MySocial</h1>
           </HeaderLogoSection>
         </Link>
       </ContainerItem>
-      <div>
-        <input
-          type='text'
-          placeholder='search'
-          name='search'
-          onChange={(event) => {
-            handlerOnChange(event);
-            setSearch(event.target.value);
-          }}
-          value={search}
-        ></input>
-      </div>
+      <ContainerItem justifyContent='start' alignItems='center'>
+        <form onSubmit={handerOnSubmit}>
+          <HeaderInput
+            type='text'
+            placeholder='search'
+            name='search'
+            onChange={(event) => {
+              // handlerOnChange(event);
+              // setSearch(event.target.value);
+              handleChange(event);
+            }}
+            value={search}
+          ></HeaderInput>
+        </form>
+      </ContainerItem>
     </HeaderContainer>
   );
 };

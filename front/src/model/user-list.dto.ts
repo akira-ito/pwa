@@ -1,5 +1,6 @@
+import { CursorConnectionDTO } from './cursor-connection.dto';
 import { User } from './user.model';
 
 export interface UserListDTO {
-  list: Array<Partial<User>>;
+  list: CursorConnectionDTO<Partial<User>>;
 }

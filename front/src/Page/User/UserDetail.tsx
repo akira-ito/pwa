@@ -8,6 +8,7 @@ import { UserGetDTO } from '../../model/user-get.dto';
 import { Container, ContainerItem } from '../../components/Layout';
 import ResultNotFound from '../../components/Form/ResultNotFound';
 import styled from 'styled-components';
+import Loading from '../../components/Form/Loading';
 
 interface UserDetailProps {}
 const UserDetail: React.FC<UserDetailProps> = () => {
@@ -24,7 +25,7 @@ const UserDetail: React.FC<UserDetailProps> = () => {
     });
   }, [id, getUser]);
 
-  if (loading) return <>'loading'</>;
+  if (loading) return <Loading message='Carregando informações dos usuario.' />;
   if (error) return <>`Error! ${error}`</>;
 
   return (
@@ -60,7 +61,7 @@ const UserDetail: React.FC<UserDetailProps> = () => {
           </Container>
           <Container>
             {data?.get.friends?.map((friend) => (
-              <UserListItem user={friend} />
+              <UserListItem user={friend} key={friend._id} />
             ))}
           </Container>
         </>

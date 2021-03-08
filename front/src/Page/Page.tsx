@@ -1,28 +1,21 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import { Container } from '../components/Layout';
-import NotFoundPage from '../components/NotFoundPage/NotFoundPage';
-import UserDetail from './User/UserDetail';
-import UserPage from './User/UserPage';
+import routes from './routes';
 
 const Page: React.FC = () => {
   return (
-    <>
+    <Suspense fallback={<div>Loading page...</div>}>
       <Switch>
-        <Route path='/' exact>
-          <UserPage />
-        </Route>
-        <Route path='/users' exact>
-          <UserPage />
-        </Route>
-        <Route path='/users/:id' exact>
-          <UserDetail />
-        </Route>
-        <Route path='*'>
-          <NotFoundPage />
-        </Route>
+        {routes.map((route, index) => (
+          <Route
+            key={route.path.concat(`${index}`)}
+            path={route.path}
+            exact={route.exact}
+            component={route.component}
+          ></Route>
+        ))}
       </Switch>
-    </>
+    </Suspense>
   );
 };
 

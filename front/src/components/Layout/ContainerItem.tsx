@@ -7,7 +7,8 @@ interface ContainerItemProps {
   spanMd: number;
   spanSm: number;
   padding: number;
-  justifyContent: 'initial' | 'center';
+  justifyContent: 'initial' | 'start' | 'center';
+  alignItems: 'normal' | 'center';
 }
 
 function condtionQuery(query: string, span: number | null) {
@@ -29,10 +30,12 @@ export const ContainerItem = styled.div.attrs<
   spanMd: props.spanMd,
   spanSm: props.spanSm,
   justifyContent: props.justifyContent ?? 'initial',
+  alignItems: props.alignItems ?? 'normal',
 }))`
   display: grid;
   padding: ${(props) => props.padding}px;
   justify-content: ${(props) => props.justifyContent};
+  align-items: ${(props) => props.alignItems};
 
   ${(props) => condtionQuery(QUERY.SM, props.spanSm)}
   ${(props) => condtionQuery(QUERY.MD, props.spanMd)}

@@ -21,7 +21,12 @@ const UserListItem: React.FC<UserListItProps> = ({ user }) => {
     <ContainerItem span={3} spanLg={3} spanMd={4} spanSm={5} padding={6}>
       <Link to={`/users/${user._id}`}>
         <UserCard>
-          <img src={user.picture} alt={user.name} />
+          <img
+            src={user.picture}
+            alt={user.name}
+            width='200px'
+            height='200px'
+          />
           <div>
             <strong>Name:</strong> {user.name}
           </div>
