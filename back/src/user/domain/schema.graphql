@@ -34,3 +34,9 @@ type PageInfo {
   endCursor: String!
   total: Int!
 }
+
+input QueryListInput {
+  name: String
+  cursor: String
+  limit: Int
+}
